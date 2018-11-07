@@ -1,18 +1,18 @@
 module.exports = {
   title: 'hustle',
   contentLoading: true,
-  locales: {
-    '/en/': {
-      lang: 'en-US',
-      title: 'VuePress',
-      description: 'Vue-powered Static Site Generator'
-    },
-    '/': {
-      lang: 'zh-CN',
-      title: 'VuePress',
-      description: 'Vue 驱动的静态网站生成器'
-    }
-  },
+  // locales: {
+  //   '/en/': {
+  //     lang: 'en-US',
+  //     title: 'hustle',
+  //     description: 'Vue-powered Static Site Generator'
+  //   },
+  //   '/': {
+  //     lang: 'zh-CN',
+  //     title: 'VuePress',
+  //     description: 'Vue 驱动的静态网站生成器'
+  //   }
+  // },
   description: 'keep going',
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
