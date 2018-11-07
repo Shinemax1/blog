@@ -1,19 +1,17 @@
 module.exports = {
-  title: 'hustle',
   contentLoading: true,
-  // locales: {
-  //   '/en/': {
-  //     lang: 'en-US',
-  //     title: 'hustle',
-  //     description: 'Vue-powered Static Site Generator'
-  //   },
-  //   '/': {
-  //     lang: 'zh-CN',
-  //     title: 'VuePress',
-  //     description: 'Vue 驱动的静态网站生成器'
-  //   }
-  // },
-  description: 'keep going',
+  locales: {
+    '/en/': {
+      lang: 'en-US',
+      title: 'hustle',
+      description: 'keep going'
+    },
+    '/': {
+      lang: 'zh-CN',
+      title: 'hustle',
+      description: 'keep going'
+    }
+  },
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
     ['link', {
