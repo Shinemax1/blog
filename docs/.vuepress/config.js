@@ -24,7 +24,7 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
-  base:  '/dist/', // 这是部署到github相关的配置 下面会讲
+  // base:  '/dist/', // 这是部署到github相关的配置 下面会讲
   markdown: {
     lineNumbers: true // 代码块显示行号
   },
