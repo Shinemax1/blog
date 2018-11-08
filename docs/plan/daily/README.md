@@ -12,8 +12,15 @@ title: 日计划
 - babel，preset-env（entry，false，usage），plugin-transform-runtime
 - splitChunks chunks（inital，async，all）
 - immutable
+- git的使用
 
 # 11.8
+
+- git学习
+- pr尝试
+- webpack源码
+
+# 11.9
 
 - chrome插件
 - node（http）、express、koa
@@ -29,3 +36,5 @@ title: 日计划
 - 文档修炼
 - docker-swarm复习
 - linux涉猎
+- 用pupoteer写一个关注掘金用户的工具
+- vueConf
