@@ -32,6 +32,7 @@ title: 日计划
 
 - https://zhuanlan.zhihu.com/p/34702356 delete require.cache[]?
 - 阿里云node.js性能检测工具
+- webpack-esnext-cli-master
 
 # 11.12
 
@@ -39,7 +40,6 @@ title: 日计划
 - node（http）、express、koa
 - node深入浅出（）
 - 掘金小册（webpack，Git，性能优化，React）
-- webpack-esnext-cli-master
 - measure-master
 - 算法课（算法软件）
 - nginx
