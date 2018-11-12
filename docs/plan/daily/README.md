@@ -36,6 +36,12 @@ title: 日计划
 
 # 11.12
 
+- 基于 webpack 的持久化缓存方案 https://github.com/pigcan/blog/issues/9 https://github.com/jiangjiu/blog-md/issues/49
+- webpack-esnext-cli-master
+
+
+# 11.13
+
 - chrome插件
 - node（http）、express、koa
 - node深入浅出（）
@@ -58,3 +64,5 @@ title: 日计划
 - 大型网站技术演进与更新
 - 高效前端 pdf
 - N-blog 
+- https://github.com/pigcan/blog 蚂蚁大佬
+- https://github.com/jiangjiu/blog-md/issues 蚂蚁大佬
