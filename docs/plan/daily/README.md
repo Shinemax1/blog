@@ -39,9 +39,13 @@ title: 日计划
 - 基于 webpack 的持久化缓存方案 https://github.com/pigcan/blog/issues/9 https://github.com/jiangjiu/blog-md/issues/49
 - webpack-esnext-cli-master
 
-
 # 11.13
 
+- 掘金小册(webpack)
+- delete并不能删掉引用对象中的key
+- webpack sideEffects
+
+- 正则
 - chrome插件
 - node（http）、express、koa
 - node深入浅出（）
@@ -66,3 +70,4 @@ title: 日计划
 - N-blog 
 - https://github.com/pigcan/blog 蚂蚁大佬
 - https://github.com/jiangjiu/blog-md/issues 蚂蚁大佬
+- https://zhuanlan.zhihu.com/eggjs
