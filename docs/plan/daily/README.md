@@ -45,6 +45,15 @@ title: 日计划
 - delete并不能删掉引用对象中的key
 - webpack sideEffects
 
+# 11.14
+
+- tree shaking
+- 掘金小册(webpack)
+- Medium
+- IaaS,PaaS和SaaS，QPS,RT和TPS，PV,UV和IP到底是什么意思？https://mp.weixin.qq.com/s/4VrllP4QKbdgSnuNEve4Iw
+
+# 11.15
+
 - 正则
 - chrome插件
 - node（http）、express、koa
