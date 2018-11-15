@@ -54,6 +54,10 @@ title: 日计划
 
 # 11.15
 
+- libuv
+- 图片埋点
+
+
 - 正则
 - chrome插件
 - node（http）、express、koa
