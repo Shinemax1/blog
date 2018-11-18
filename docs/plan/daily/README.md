@@ -57,6 +57,11 @@ title: 日计划
 - libuv
 - 图片埋点
 
+# 11.18
+
+- 正则，珠峰视频
+- webpack源码解析 https://lancelou.com/post/webpack-contributors-guide-part123 
+- require源码阅读 https://segmentfault.com/a/1190000014026915#articleHeader4
 
 - 正则
 - chrome插件
