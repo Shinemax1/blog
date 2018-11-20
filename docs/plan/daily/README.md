@@ -63,6 +63,18 @@ title: 日计划
 - webpack源码解析 https://lancelou.com/post/webpack-contributors-guide-part123 
 - require源码阅读 https://segmentfault.com/a/1190000014026915#articleHeader4
 
+# 11.19
+
+- 算法1
+- 正则
+
+# 11.20
+
+- 正则，珠峰视频
+- 算法2
+
+# 11.21
+
 - 正则
 - chrome插件
 - node（http）、express、koa
