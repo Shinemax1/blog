@@ -7,7 +7,7 @@ title: 日计划
 - 文浩的小项目有小bug
 - taro发布1.1版本
 - 将阿里面试题整理了一番
-- 复习vue源码，vue-router源码，SSR，setState，防抖与节流，webpack源码解析，react，redux，saga，dva源码，webpack-dev源码，webpack异步chunk原理，promise原理，async原理（重写后的co），浏览器渲染路径优化。
+- 复习vue源码，vue-router源码，SSR，setState，防抖与节流，webpack源码解析，react，redux，saga，dva源码，webpack-dev源码，webpack异步chunk原理，promise原理，async原理（重写后的co），浏览器渲染路径优化,dom-diff。
 - node深入浅出（21）
 - babel，preset-env（entry，false，usage），plugin-transform-runtime
 - splitChunks chunks（inital，async，all）
@@ -75,6 +75,18 @@ title: 日计划
 
 # 11.21
 
+- 正则pdf
+- nodejs性能优化 https://juejin.im/entry/5bee3b5d6fb9a04a082140d2?utm_source=gold_browser_extension
+
+# 11.26
+
+- tree-shaking
+
+# 11.27
+
+- proxy reflect https://juejin.im/post/5b7aa257e51d4538c86cf6bb
+- 
+
 - 正则
 - chrome插件
 - node（http）、express、koa
@@ -97,7 +109,8 @@ title: 日计划
 - node实战 egg、docker、vue 公众号nodelover
 - 大型网站技术演进与更新
 - 高效前端 pdf
-- N-blog 
+- git N-blog 
 - https://github.com/pigcan/blog 蚂蚁大佬
 - https://github.com/jiangjiu/blog-md/issues 蚂蚁大佬
 - https://zhuanlan.zhihu.com/eggjs
+- git typescript-book-chinese nginxconfig.io apidoc resolve
