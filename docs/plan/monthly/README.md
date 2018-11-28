@@ -2,6 +2,8 @@
 title: 月计划
 ---
 
+# Interview
+
 1. NaN不等于自身。6大基本类型 null、undefined、String、Boolean、Number、symbol 引用类型Object
 2. typeOf null --> Object
 3.  + 'b' --> NaN    + '1' --> 1
@@ -149,5 +151,7 @@ console.log(obj.hasOwnProperty('sayHello'));
 ```js
 parseFloat((0.1+0.2).toFixed(10))
 ```
-
+16. 新生代
+  - 新生代中的对象一般存活时间较短，使用 Scavenge GC 算法。
+  - 在新生代空间中，内存空间分为两部分，分别为 From 空间和 To 空间。在这两个空间中，必定有一个空间是使用的，另一个空间是空闲的。新分配的对象会被放入 From 空间中，当 From 空间被占满时，新生代 GC 就会启动了。算法会检查 From 空间中存活的对象并复制到 To 空间中，如果有失活的对象就会销毁。当复制完成后将 From 空间和 To 空间互换，这样 GC 就结束了。
 

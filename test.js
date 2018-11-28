@@ -39,3 +39,13 @@ let p = onWatch(obj, (v) => {
 })
 p.a = 2 // bind `value` to `2`
 p.a // -> Get 'a' = 2
+
+
+var a = 0
+var b = async () => {
+  a = a + 20 + await 10 
+  console.log('2', a) // -> '2' 10
+  a = a + (await 10) + a
+  console.log('3', a) // -> '3' 20
+}
+b()

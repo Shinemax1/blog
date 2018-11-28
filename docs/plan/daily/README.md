@@ -7,7 +7,7 @@ title: 日计划
 - 文浩的小项目有小bug
 - taro发布1.1版本
 - 将阿里面试题整理了一番
-- 复习vue源码，vue-router源码，SSR，setState，防抖与节流，webpack源码解析，react，redux，saga，dva源码，webpack-dev源码，webpack异步chunk原理，promise原理，async原理（重写后的co），浏览器渲染路径优化,dom-diff。
+- 复习vue源码，vue-router源码，SSR，setState，防抖与节流，webpack源码解析，react，redux，saga，dva源码，webpack-dev源码，webpack异步chunk原理，promise原理，async原理（重写后的co），浏览器渲染路径优化,dom-diff,immutable,react-dom。
 - node深入浅出（21）
 - babel，preset-env（entry，false，usage），plugin-transform-runtime
 - splitChunks chunks（inital，async，all）
@@ -85,6 +85,17 @@ title: 日计划
 # 11.27
 
 - proxy reflect https://juejin.im/post/5b7aa257e51d4538c86cf6bb
+
+# 11.28
+
+- preload prefetch precontent https://juejin.im/post/5b5984b851882561da216311
+- 输入url发生了什么 reflow repaint 增量异步reflow dirty2种 https://segmentfault.com/a/1190000010298038
+- serviceWork在SSR中的应用 https://zhuanlan.zhihu.com/p/31630322
+  - 用户首次访问站点，首屏由服务端渲染，后续路由前端跳转。ServiceWorker 开始首次安装。过程中请求预缓存列表中的静态资源和 /appshell 路由，缓存 App Shell 页面。
+  - 用户后续访问，刷新页面都不会到达服务端，请求被 ServiceWorker 拦截，统一返回之前缓存的 App Shell 页面，由前端渲染具体内容。
+- 跨域多种方式
+- jwt、session、cookie
+- 面试题 https://juejin.im/post/5befeb5051882511a8527dbe
 - 
 
 - 正则
