@@ -101,7 +101,7 @@ title: 日计划
   - domain，通过iframe设置src，在2个html中都设置window.domain就可以进行跨域
 - jwt、session、cookie
   - jwt:通过后端登录使用jsonwebtoken包sign一个jwt返回给前端，前端放入localstorage，每次访问带上authorized，后端通过verify验证前端传过来的jwt是否正确，如果err，则失效或过期，也能判断解密出来的对象中是否有admin来处理权限问题
-  - cookie，后端响应报文中返回Set-Cookie字段，设置cookie，可以设置domain，expires，path，Httponly，中文需要编码
+  - cookie，后端响应报文中返回Set-Cookie字段，设置cookie，可以设置domain，expires，path，Httponly，SameSite，中文需要编码
   - session，基于cookie的一种更安全的策略，由后端维护数据对应的key是cookie里的id，每次前端携带cookie访问，都会取到cookie里的值到session中匹配。
 - 面试题 https://juejin.im/post/5befeb5051882511a8527dbe
 session storage/pureComponent/setState/Component、Element/ajax为什么要在didComponent/map
@@ -169,8 +169,19 @@ session storage/pureComponent/setState/Component、Element/ajax为什么要在di
 - 在componentDidUpdate中获取异步数据可以等到DOM节点初始化完了
 - React.Children.map(children,(child,index)=>{})
 
+- 接口约定的返回结果的参数。s,m,r,c，接口的原子性：保证这个接口要么完整执行，要么都不执行。
+
+- 在ajax请求后台数据时有时会报 HTTP 400 错误 - 请求无效 (Bad request);出现这个请求无效报错说明请求没有进入到后台服务里；
+  - 原因：1）前端提交数据的字段名称或者是字段类型和后台的实体类不一致，导致无法封装；
+       2）前端提交的到后台的数据应该是json字符串类型，而前端没有将对象转化为字符串类型；
+- 406 Not Acceptable 状态码表示客户端错误，表示请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体。原因是一些搜索引擎的爬虫。
+
+# 12.6 
+
+- https://github.com/alienzhou/frontend-tech-list 前端学习清单
 
 - 正则
+- github jooger
 - chrome插件
 - node（http）、express、koa
 - node深入浅出（）
@@ -197,3 +208,4 @@ session storage/pureComponent/setState/Component、Element/ajax为什么要在di
 - https://github.com/jiangjiu/blog-md/issues 蚂蚁大佬
 - https://zhuanlan.zhihu.com/eggjs
 - git typescript-book-chinese nginxconfig.io apidoc resolve
+- vue源码解析 百度云
