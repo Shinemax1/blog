@@ -103,8 +103,9 @@ title: 日计划
   - jwt:通过后端登录使用jsonwebtoken包sign一个jwt返回给前端，前端放入localstorage，每次访问带上authorized，后端通过verify验证前端传过来的jwt是否正确，如果err，则失效或过期，也能判断解密出来的对象中是否有admin来处理权限问题
   - cookie，后端响应报文中返回Set-Cookie字段，设置cookie，可以设置domain，expires，path，Httponly，SameSite，中文需要编码
   - session，基于cookie的一种更安全的策略，由后端维护数据对应的key是cookie里的id，每次前端携带cookie访问，都会取到cookie里的值到session中匹配。
-- 面试题 https://juejin.im/post/5befeb5051882511a8527dbe
-session storage/pureComponent/setState/Component、Element/ajax为什么要在didComponent/map
+- 面试题 https://juejin.im/post/5befeb5051882511a8527dbe 
+- session storage/pureComponent/setState/Component、Element/ajax为什么要在didComponent/map
+
 # 11.29
 
 - http Header
@@ -179,6 +180,38 @@ session storage/pureComponent/setState/Component、Element/ajax为什么要在di
 # 12.6 
 
 - https://github.com/alienzhou/frontend-tech-list 前端学习清单
+- koa、express整理
+- egg学习
+
+# 12.10
+
+- QUIC(HTTP/3) https://www.cnbeta.com/articles/tech/796583.htm
+  - 扩展了SPDY的多路复用，是交互更加顺畅，路由不阻塞
+  - 移动端改变mac地址，不会影响socket(重新关闭)
+
+# 12.11
+
+- RPC https://blog.csdn.net/mindfloating/article/details/39474123
+ - 同步调用
+   - 客户方等待调用执行完成并返回结果。
+ - 异步调用
+   - 客户方调用后不用等待执行结果返回，但依然可以通过回调通知等方式获取返回结果。
+   - 若客户方不关心调用返回结果，则变成单向异步调用，单向调用不用返回结果。
+- 前端数据采集的渐进式思考 http://ks.netease.com/blog?id=13985
+  - 错误信息、性能监控、调试内容、埋点数据
+- VConsole https://github.com/Tencent/vConsole
+- eruda https://github.com/liriliri/eruda/blob/master/doc/README_CN.md
+
+# 12.12
+
+- npm dependence version http://blog.kankanan.com/article/package.json-65874ef6-dependencies-4e2d7684540479cd7248672c53f75f625f0f.html
+
+- protobuffer https://halfrost.com/protobuf_encode/
+  - 可以很容易地引入新的字段，并且不需要检查数据的中间服务器可以简单地解析并传递数据，而无需了解所有字段。
+  - 数据格式更加具有自我描述性，可以用各种语言来处理(C++, Java 等各种语言)
+  - 自动生成的序列化和反序列化代码避免了手动解析的需要。（官方提供自动生成代码工具，各个语言平台的基本都有）
+  - 除了用于 RPC（远程过程调用）请求之外，人们开始将 protocol buffers 用作持久存储数据的便捷自描述格式（例如，在Bigtable中）。
+  - 服务器的 RPC 接口可以先声明为协议的一部分，然后用 protocol compiler 生成基类，用户可以使用服务器接口的实际实现来覆盖它们。
 
 - 正则
 - github jooger
@@ -209,3 +242,10 @@ session storage/pureComponent/setState/Component、Element/ajax为什么要在di
 - https://zhuanlan.zhihu.com/eggjs
 - git typescript-book-chinese nginxconfig.io apidoc resolve
 - vue源码解析 百度云
+- Ant之build.xml详解 https://blog.csdn.net/mevicky/article/details/72828554
+- webpack源码解析   https://github.com/lihongxun945/diving-into-webpack 
+- https://time.geekbang.org/ 极客时间 react git linux
+- http://dmitrysoshnikov.com/ script深入
+- 前端master https://frontendmasters.com/books/front-end-handbook/2018/practice/fd-dev-for.html
+- 可伸缩服务架构设计和中间件pdf -黄挺
+- netease每周分享 zk+dubbo node监控系统
