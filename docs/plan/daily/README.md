@@ -213,6 +213,13 @@ title: 日计划
   - 除了用于 RPC（远程过程调用）请求之外，人们开始将 protocol buffers 用作持久存储数据的便捷自描述格式（例如，在Bigtable中）。
   - 服务器的 RPC 接口可以先声明为协议的一部分，然后用 protocol compiler 生成基类，用户可以使用服务器接口的实际实现来覆盖它们。
 
+# 12.13
+
+- Array.apply(null,{length:20})
+  - Array() === new Array()
+  - https://segmentfault.com/a/1190000011435501
+- prepublish、preinstall npm钩子 https://segmentfault.com/a/1190000008832423
+
 - 正则
 - github jooger
 - chrome插件
