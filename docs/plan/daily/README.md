@@ -197,7 +197,7 @@ title: 日计划
  - 异步调用
    - 客户方调用后不用等待执行结果返回，但依然可以通过回调通知等方式获取返回结果。
    - 若客户方不关心调用返回结果，则变成单向异步调用，单向调用不用返回结果。
-- 前端数据采集的渐进式思考 http://ks.netease.com/blog?id=13985
+- 前端数据采集的渐进式思考 http://kms.netease.com/article/6485
   - 错误信息、性能监控、调试内容、埋点数据
 - VConsole https://github.com/Tencent/vConsole
 - eruda https://github.com/liriliri/eruda/blob/master/doc/README_CN.md
@@ -213,12 +213,91 @@ title: 日计划
   - 除了用于 RPC（远程过程调用）请求之外，人们开始将 protocol buffers 用作持久存储数据的便捷自描述格式（例如，在Bigtable中）。
   - 服务器的 RPC 接口可以先声明为协议的一部分，然后用 protocol compiler 生成基类，用户可以使用服务器接口的实际实现来覆盖它们。
 
-# 12.13
+# 12.17
 
 - Array.apply(null,{length:20})
   - Array() === new Array()
   - https://segmentfault.com/a/1190000011435501
 - prepublish、preinstall npm钩子 https://segmentfault.com/a/1190000008832423
+
+# 12.18
+
+- react服务器部署 https://segmentfault.com/a/1190000015685430
+- git revert https://juejin.im/post/5b0e5adc6fb9a009d82e4f20
+
+# 12.20
+
+- nodejs最佳实践 https://github.com/i0natan/nodebestpractices/blob/master/README.chinese.md#1-project-structure-practices
+
+# 12.22
+
+- 多域名下的localstorage的跨域方案 https://www.jianshu.com/p/e86d92aeae69
+  - sessionStorage的多页面共享方案 https://blog.kazaff.me/2016/09/09/%E8%AF%91-%E5%9C%A8%E5%A4%9A%E4%B8%AA%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B9%8B%E9%97%B4%E5%85%B1%E4%BA%ABsessionStorage/
+
+# 12.23
+
+- ts+React
+
+# 1.4
+
+- http://www.ayqy.net/blog/redux%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/#articleHeader7
+  - master-dev queue 相当于每次上车(subscribe)的时候，如果正好在(dispatch)开车，那只能赶下一班车，因为nextListeners(候车室)的引用是给车了。让车先带走这一车的人，在去下次(dispatch)开车的时候，去清空nextListeners(候车室)的引用
+  - 下车的时候也不能跳车，因为直接操作的是新的引用，下趟车就不上了。
+  - 双缓冲技术（double buffering），currentListeners用来缓存上一次的监听，每次subscribe都会从currentListeners.slice()一个新的数组，nextListeners，通过操作nextListeners来缓冲用户的行为
+- https://juejin.im/post/5b193353f265da6e0d7a2dcd
+  - 判断dirty是否为true，如果为false，则不进行$digest递归。
+  - （dirty默认为true）遍历$$watchers，取出对应的属性值的老值和新值根据objectEquality进行新老值的对比。如果两个值不同，则继续往下执行。如果两个值相同，则设置dirty为false。检查完所有的watcher之后，如果dirty还为true（这一点需要阅读我下面的伪代码）
+  - 设置dirty为true用新值代替老值，这样，在下一轮递归的时候，老值就是这一轮的新值再次调用$digest
+- http://www.ayqy.net/blog/react-async-rendering/ Async Rendering
+- https://zhuanlan.zhihu.com/p/26027085 React Fiber
+- http://www.ayqy.net/blog/dive-into-react-fiber/ 详解fiber
+  - 构建workInProgress tree的过程就是diff的过程，通过requestIdleCallback来调度执行一组任务，每完成一个任务后回来看看有没有插队的（更紧急的），每完成一组任务，把时间控制权交还给主线程，直到下一次requestIdleCallback回调再继续构建workInProgress tree
+  ```
+    DOM
+        真实DOM节点
+    -------
+    effect
+        每个workInProgress tree节点上都有一个effect list
+        用来存放diff结果
+        当前节点更新完毕会向上merge effect list（queue收集diff结果）
+    - - - -
+    workInProgress
+        workInProgress tree是reconcile过程中从fiber tree建立的当前进度快照，用于断点恢复
+    - - - -
+    fiber
+        fiber tree与vDOM tree类似，用来描述增量更新所需的上下文信息
+    -------
+    Elements
+        描述UI长什么样子（type, props）
+  ```
+  - effect是patch阶段，处理effect list（包括3种处理：更新DOM树、调用组件生命周期函数以及更新ref等内部状态）
+  - 出对结束，第2阶段结束，所有更新都commit到DOM树上了
+
+# 1.6
+
+- https://mp.weixin.qq.com/s/gMlJAOtFgUU1EqMbLAy35Q IOC依赖倒置、控制反转。把APP抽象出来，不关心实现，只关心约定。是面向接口编程，没有业务代码。更像是一个容器。
+
+# 1.8
+
+- https://www.tangshuang.net/3343.html webapck external
+  - amd或者target: node，node:{global:flase}会默认使用require()导入
+  - external默认string会使用global形式
+  - 在node环境中使用external，就直接module.exports = require(jQuery)，不导入到bundle.js，但是能够直接在node环境中运行
+
+# 1.9
+
+- https://segmentfault.com/a/1190000014056810 koa上传、下载文件
+- https://bbs.kaola.com/topic/7/webpack-%E9%95%BF%E7%BC%93%E5%AD%98-long-term-cache-%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8E%A2%E7%B4%A2 webpack长缓存
+- https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b
+  - npx cli 不会在你本地有存留
+  - npx -p node@6 -- node -v 
+  - npx gist
+  - npx -p fortune -p cowsay -p lolcatjs -c 'echo | fortune | cowsay -f charizardvice.cow | lolcatjs'
+
+# 1.14
+
+- http://www.ruanyifeng.com/blog/2015/11/circular-dependency.html Commonjs、ES6循环引用
+- https://blog.csdn.net/weixin_38606332/article/details/80907275 css中“~”（波浪号）、“，”（逗号）、“+”（加号）和“>”（大于号）详解
 
 - 正则
 - github jooger
@@ -256,3 +335,5 @@ title: 日计划
 - 前端master https://frontendmasters.com/books/front-end-handbook/2018/practice/fd-dev-for.html
 - 可伸缩服务架构设计和中间件pdf -黄挺
 - netease每周分享 zk+dubbo node监控系统
+- 大深海 https://github.com/chenshenhai koa egg学习笔记 很好
+- https://chenshenhai.github.io/koa2-note/ 连上面的
