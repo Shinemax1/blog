@@ -77,6 +77,10 @@ title: 日计划
 
 - 正则pdf
 - nodejs性能优化 https://juejin.im/entry/5bee3b5d6fb9a04a082140d2?utm_source=gold_browser_extension
+  - 1、使用最新版本的Node
+  - 2、使用 fast-json-stringify 加速 JSON 序列化
+  - 3、可以在代码中把全局的 Promise 换为 bluebird 的实现
+  - 4、
 
 # 11.26
 
@@ -297,7 +301,143 @@ title: 日计划
 # 1.14
 
 - http://www.ruanyifeng.com/blog/2015/11/circular-dependency.html Commonjs、ES6循环引用
-- https://blog.csdn.net/weixin_38606332/article/details/80907275 css中“~”（波浪号）、“，”（逗号）、“+”（加号）和“>”（大于号）详解
+- https://blog.csdn.net/suoyasong/article/details/80528218 css中“~”（波浪号）、“，”（逗号）、“+”（加号）和“>”（大于号）详解
+
+# 1.17
+
+- https://www.zhihu.com/question/301253397/answer/527408312 jwt
+  - 我理解你的意思啦，你就是觉得jwt每次请求都要解密还原json，消耗性能。我是说只要加密的json内容不是很大，性能不成问题。如果json里面放入太多的信息不但加密解密费劲，而且每次http传输都是问题，因为jwt是自包含的。jwt对服务器的压力是随着请求次数成正比的。
+  而session对服务器端的压力是随着用户量成正比的，即使用户不请求，只要session没有过期，就要维护这个回话。
+  当10000个用户登录之后，但是当前只有100个用户是活跃的，你想想jwt和session之间的差别吧。session要维护这10000个会话题，而jwt只要响应这100个用户发送请求时候的解密。
+  - 特别是当集群部署的时候，为了保证某一个服务的任何一个实例可用，session要在同一个服务的不同实例之间实时同步。当一个服务实例宕机，其它实力必须要有同样的这10000个session。
+  - 注区分一下摘要和加密的不同，这是很多老鸟也容易犯错的地方。有一个最根本的区别就是，加密一定能完整还原出原始数据。因此像MD5、SHA1这种处理后结果长度固定的算法都是摘要算法。
+
+# 1.19
+
+- 网易前端大会二期
+  - 资料待定
+
+# 1.20
+
+- https://github.com/hanzichi/underscore-analysis/issues/1 void 0
+  - undefined是全局的变量，IE8下能被改变，在局部作用域也能被改变
+  - void 后面不管跟什么都是返回undefined
+
+# 1.21
+
+- http://www.ruanyifeng.com/blog/2017/04/memory-leak.html js内存泄漏  
+  - 引用计数，会有一张引用表对内存中所有的资源都有计数，计数为0的将会被垃圾回收。
+  - 如果连续五次垃圾回收之后，内存占用一次比一次大，就有内存泄漏。这就要求实时查看内存占用。
+  - node --expose-gc 表示允许手动执行垃圾回收机制
+  - process.memoryUsage 返回node进程占用的资源信息
+    - rss（resident set size）：所有内存占用，包括指令区和堆栈。
+    - heapTotal："堆"占用的内存，包括用到的和没用到的。
+    - **heapUsed：用到的堆的部分。**
+    - external： V8 引擎内部的 C++ 对象占用的内存。
+- https://zhuanlan.zhihu.com/p/25454328 weakMap学习
+  - key只能是对象(弱引用)，不会被gc干扰，只有在主动回收时，会被回收，回收的同时weakMap值消失
+  - 无法遍历，因为如果可枚举，其得到的结果将是不确定的
+  - 作用1、私有：因为无法遍历，只有自己持有引用过来取值的时候才会拿到值
+  - 作用2、省内存：手动回收key，weakmap所对应的value将会消失
+  - 场景： 可以应用到其它的场景中，比如标记对象的状态（用于任务调度、错误处理等），比如为DOM元素添加额外的关联数据等等
+  - webcomponents weakmap polyfill
+  ```js
+  if (typeof WeakMap === 'undefined') {
+    (function() {
+      var defineProperty = Object.defineProperty;
+      var counter = Date.now() % 1e9;
+      var WeakMap = function() {
+        // 记录一个唯一的name属性
+        this.name = '__st' + (Math.random() * 1e9 >>> 0) + (counter++ + '__');
+      };
+      WeakMap.prototype = {
+        // 在WeakMap的key对象中添加与WeakMap实例name相同的属性
+        // 利用这个属性来保存value
+        // 下面的API原理类似
+        set: function(key, value) {
+          var entry = key[this.name];
+          if (entry && entry[0] === key)
+            entry[1] = value;
+          else
+            defineProperty(key, this.name, {value: [key, value], writable: true});
+          return this;
+        },
+        get: function(key) {
+          var entry;
+          return (entry = key[this.name]) && entry[0] === key ?
+              entry[1] : undefined;
+        },
+        delete: function(key) {
+          var entry = key[this.name];
+          if (!entry || entry[0] !== key) return false;
+          entry[0] = entry[1] = undefined;
+          return true;
+        },
+        has: function(key) {
+          var entry = key[this.name];
+          if (!entry) return false;
+          return entry[0] === key;
+        }
+      };
+      window.WeakMap = WeakMap;
+    })();
+  }
+  ```
+- https://github.com/xizhibei/blog/issues/75  Node.js垃圾回收机制
+  - 当内存使用上升过快来不及被回收，或者根本无法被回收的时候，Node.js 容易出现崩溃现象（OOM，即 Out of memory），这时候可以调整 node 的参数 --max-old-space-size，单位是 MB。
+  - Buffer 既不是在 New Space 也不是在 Old Space，而是在 Node 的 C++ 层面申请的，大小不受 v8 的限制。
+  - node --v8-options | grep gc 查看gc参数
+- https://www.jianshu.com/p/4129a3fce7bb Node.js垃圾回收
+  - 常驻内存分为(代码区(code segment)、栈(stack)、堆(heap)、堆外内存)
+  - 栈的回收只需要作用域内栈的指针下移，整个作用域局部变量都会出栈，垃圾回收
+  - 堆的回收最复杂，也是最容易出现内存泄漏的(OOM)
+    - 堆内存上限，64位1.4G，32位0.7G，其中新生代64位占64M，32位占32M，可以通过
+    ```js
+    //更改老年代堆内存
+    --max-old-space-size=3000 // 单位为MB
+    // 更改新生代堆内存
+    // 一般是64或128M，太大会导致新生代GC次数减少，但是GC时间过长
+    --max-new-space-size= 128*1024 // 单位为KB
+    ```
+    - 老生代空间是新生代的40倍
+    - scavenge算法是依次复制，在新生代中因为基本寿命都不长，所以scavenge算法效率高，且没有内存碎片，但是From和To空间对半分需要足够的空间复杂度
+    - 老生代使用标记清除配合标记整理，老生代大不适合scavenge，所以需要标记清楚，标记活的清楚死的，随后内存会不连续，当需要一个大的内存空间存放对象，无法拿出，需要标记整理，把活的对象推往一边，只不过这个复杂度更大，不到万不得已v8不会用
+    - 增量标记，每隔5ms标记一次，不会出现全停顿(stop-the-world)
+    - 每一个闭包都会引用其外部函数的Context，以此访问需要读取的外部变量。被闭包捕捉，加入Context中的变量，我们称为Context变量，分配在堆。而真正的 局部变量（local variable）是 x ，保存在栈，当outer执行完毕后，其信息出栈，变量 x 自然销毁，而Context被闭包引用，如果有任何一个闭包存活，Context都将存活，y 将不会被销毁。
+    ```js
+    function outer () { 
+        var x; // 真正的局部变量
+        var y; // context variable, 被inner1使用
+        var z; // context variable, 被inner2使用
+        function inner1 () { 
+          use(y); 
+        } 
+        function inner2 () { 
+          use(z); 
+        } 
+        function inner3 () { 
+          /* 虽然函数体为空，但是作为闭包，依旧引用outer的Context */
+        } 
+        return [inner1, inner2, inner3];
+    }
+    ```
+- https://yq.aliyun.com/articles/592880 垃圾回收机制详解
+- https://help.aliyun.com/document_detail/64011.html?spm=a2c4g.11186623.6.569.3e4a24efL8Rb68 alinode最佳实践
+
+
+# 1.22
+
+- symbol、symbol.for
+  - symbol程序运行时的值，symbol.for放在全局，每次都会去找相同key的值
+
+# 1.23
+
+- https://blog.csdn.net/moakey/article/details/78917516 什么是预发环境
+  - 直接连接线上的环境，数据库是什么的都是线上的，相当于从负载均衡机子中抽离一台机器
+- https://zhuanlan.zhihu.com/p/32712056 灰度部署
+  - A/B testing，线上会有A/B两种风格的代码，主要受运维和产品的决策，也是通过数据驱动来真正决策
+  - 需要流量的精确控制
+- **https://github.com/boylegu/regal 灰度只能分流策略**
 
 - 正则
 - github jooger
@@ -337,3 +477,4 @@ title: 日计划
 - netease每周分享 zk+dubbo node监控系统
 - 大深海 https://github.com/chenshenhai koa egg学习笔记 很好
 - https://chenshenhai.github.io/koa2-note/ 连上面的
+- http://d2forum.alibaba-inc.com/#/past/d2-12 d2
